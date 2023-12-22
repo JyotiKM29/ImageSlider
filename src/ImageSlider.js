@@ -29,34 +29,34 @@ const ImageSlider = () => {
 
   const handleSelect = (index) => {
     setSelectedImage(SlideImages[startIndex + index]);
-    setZoomLevel(1); // Reset zoom level when a new image is selected
+    setZoomLevel(1); 
   };
 
   const handleZoomIn = () => {
-    setZoomLevel((prevZoom) => Math.min(prevZoom + 0.1, 3)); // Increase zoom by 0.1, up to a max of 3
+    setZoomLevel((prevZoom) => Math.min(prevZoom + 0.1, 3)); 
     if (transformRef.current) {
       transformRef.current.zoomIn();
     }
   };
 
   const handleZoomOut = () => {
-    setZoomLevel((prevZoom) => Math.max(prevZoom - 0.1, 1)); // Decrease zoom by 0.1, down to a min of 1
+    setZoomLevel((prevZoom) => Math.max(prevZoom - 0.1, 1)); 
     if (transformRef.current) {
       transformRef.current.zoomOut();
     }
   };
 
   return (
-    <div className="w-screen h-screen p-20 flex flex-col justify-center items-center space-y-6">
-      <h1 className="text-5xl font-serif ">Image Slider</h1>
-      <div className="flex space-x-2">
+    <div className="w-screen h-screen p-6 md:p-20 flex flex-col justify-center items-center space-y-6">
+      <h1 className="text-4xl md:text-5xl font-serif ">Image Slider</h1>
+      <div className="flex flex-col md:flex-row space-x-2">
         {/* Slider Images */}
-        <div className="flex flex-col space-y-4">
+        <div className="flex md:flex-col space-x-2 md:space-y-4">
           <button onClick={handlePrev}>Prev</button>
           {SlideImages.slice(startIndex, startIndex + 5).map((image, index) => (
             <button
               key={image.id}
-              className={`h-20 w-20 border overflow-hidden ${
+              className={` h-15 w-15 md:h-20 md:w-20 border overflow-hidden ${
                 selectedImage && selectedImage.id === image.id
                   ? "border-orange-500"
                   : ""
@@ -68,15 +68,15 @@ const ImageSlider = () => {
           ))}
           <button onClick={handleNext}>Next</button>
         </div>
-        {/* Image Show */}
+       
         <TransformWrapper
           initialScale={1}
           ref={transformRef}
           options={{ limitToBounds: false }}
         >
           {({ zoomIn, zoomOut, resetTransform }) => (
-            <div className="flex flex-col">
-              <div className="h-[65vh] w-[35vw]">
+            <div className="flex  flex-col  h-[70vh]">
+              <div className="h-[55vh] w-[90vw] md:h-[65vh] md:w-[35vw] mt-8  md:mt-0 overflow-hidden">
                 {selectedImage && (
                   <TransformComponent>
                     <img
@@ -101,7 +101,8 @@ const ImageSlider = () => {
                   max="3"
                   step="0.1"
                   value={zoomLevel}
-                  onChange={(e) => setZoomLevel(parseFloat(e.target.value))}
+                  onChange={(e) => 
+                  setZoomLevel(parseFloat(e.target.value))}
                   className="flex-1"
                 />
                 <button
