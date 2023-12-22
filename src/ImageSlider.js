@@ -10,7 +10,7 @@ const SlideImages = [
   { id: 3, value: "/images/ring14.jpeg" },
   { id: 4, value: "/images/ring15.jpeg" },
   { id: 5, value: "/images/ring16.jpeg" },
-  { id: 6, value: "/images/ring17.jpeg" },
+
 ];
 
 const ImageSlider = () => {
