@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 
 const SlideImages = [
   { id: 0, value: "/images/ring11.jpeg" },
@@ -29,18 +31,18 @@ const ImageSlider = () => {
 
   const handleSelect = (index) => {
     setSelectedImage(SlideImages[startIndex + index]);
-    setZoomLevel(1); 
+    setZoomLevel(1);
   };
 
   const handleZoomIn = () => {
-    setZoomLevel((prevZoom) => Math.min(prevZoom + 0.1, 3)); 
+    setZoomLevel((prevZoom) => Math.min(prevZoom + 0.1, 3));
     if (transformRef.current) {
       transformRef.current.zoomIn();
     }
   };
 
   const handleZoomOut = () => {
-    setZoomLevel((prevZoom) => Math.max(prevZoom - 0.1, 1)); 
+    setZoomLevel((prevZoom) => Math.max(prevZoom - 0.1, 1));
     if (transformRef.current) {
       transformRef.current.zoomOut();
     }
@@ -52,7 +54,13 @@ const ImageSlider = () => {
       <div className="flex flex-col md:flex-row space-x-2">
         {/* Slider Images */}
         <div className="flex md:flex-col space-x-2 md:space-y-4">
-          <button onClick={handlePrev}>Prev</button>
+          <button
+            onClick={handlePrev}
+            className="flex justify-center items-center
+            -rotate-90 md:rotate-0"
+          >
+            <IoIosArrowUp className="text-4xl " />
+          </button>
           {SlideImages.slice(startIndex, startIndex + 5).map((image, index) => (
             <button
               key={image.id}
@@ -66,9 +74,13 @@ const ImageSlider = () => {
               <img src={image.value} alt={`Img${index}`} />
             </button>
           ))}
-          <button onClick={handleNext}>Next</button>
+          <button onClick={handleNext}
+          className="flex justify-center items-center -rotate-90 md:rotate-0"
+          >
+            <IoIosArrowDown className="text-4xl"  />
+          </button>
         </div>
-       
+
         <TransformWrapper
           initialScale={1}
           ref={transformRef}
@@ -94,15 +106,14 @@ const ImageSlider = () => {
                 >
                   +
                 </button>
-                
+
                 <input
                   type="range"
                   min="1"
                   max="3"
                   step="0.1"
                   value={zoomLevel}
-                  onChange={(e) => 
-                  setZoomLevel(parseFloat(e.target.value))}
+                  onChange={(e) => setZoomLevel(parseFloat(e.target.value))}
                   className="flex-1"
                 />
                 <button
